@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskflow</title>
+
+    <!-- Google Fonts — this is how you pull in custom fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Link to our CSS file — keeps styling separate from structure -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 
+        HTML is all about STRUCTURE. Think of it as the skeleton.
+        Each element (tag) describes WHAT something is, not how it looks.
+    -->
+
+    <div class="app">
+
+        <!-- Header section -->
+        <header class="header">
+            <h1 class="logo">Taskflow</h1>
+            <p class="subtitle">A simple place for your todos</p>
+            <div class="date" id="current-date"></div>
+        </header>
+
+        <!-- The form for adding new tasks -->
+        <form class="task-form" id="task-form">
+            <input
+                type="text"
+                id="task-input"
+                class="task-input"
+                placeholder="What needs to be done?"
+                autocomplete="off"
+                required
+            >
+            <button type="submit" class="add-btn">Add</button>
+        </form>
+
+        <!-- Filter buttons to show all, active, or completed tasks -->
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <!-- Task list — this starts empty; JavaScript fills it in -->
+        <ul class="task-list" id="task-list"></ul>
+
+        <!-- Footer with task count -->
+        <div class="footer" id="footer">
+            <span id="task-count">0 tasks</span>
+            <button class="clear-btn" id="clear-completed">Clear completed</button>
+        </div>
+
+        <!-- Empty state shown when there are no tasks -->
+        <div class="empty-state" id="empty-state">
+            <div class="empty-icon">✎</div>
+            <p>No tasks yet. Add one above!</p>
+        </div>
+
+    </div>
+
+    <!-- Link to our JavaScript file — keeps behavior separate from structure -->
+    <script src="script.js"></script>
+
+</body>
+</html>

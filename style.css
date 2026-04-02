@@ -1,0 +1,362 @@
+/*
+  CSS is all about APPEARANCE. It controls how things look.
+  
+  CSS Variables (custom properties) let you define reusable values
+  in one place — change them here and they update everywhere.
+*/
+:root {
+    --color-bg: #f5f0eb;
+    --color-surface: #ffffff;
+    --color-text: #2c2c2c;
+    --color-text-light: #8a8579;
+    --color-accent: #d4603a;
+    --color-accent-hover: #be5232;
+    --color-border: #e8e2db;
+    --color-completed: #b5b0a8;
+    --color-danger: #c44;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --radius: 12px;
+    --shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Reset — removes default browser styling for consistency */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+
+    /* Subtle background texture */
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(212, 96, 58, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212, 96, 58, 0.03) 0%, transparent 50%);
+}
+
+/* Main app container */
+.app {
+    width: 100%;
+    max-width: 520px;
+}
+
+/* ===== HEADER ===== */
+.header {
+    margin-bottom: 36px;
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: var(--color-text);
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+.date {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+}
+
+/* ===== FORM ===== 
+   Flexbox is used here to lay out the input and button side-by-side.
+*/
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.task-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.task-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(212, 96, 58, 0.12);
+}
+
+.task-input::placeholder {
+    color: var(--color-text-light);
+}
+
+.add-btn {
+    padding: 14px 24px;
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.add-btn:hover {
+    background: var(--color-accent-hover);
+}
+
+.add-btn:active {
+    transform: scale(0.97);
+}
+
+/* ===== FILTERS ===== */
+.filters {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover {
+    border-color: var(--color-text-light);
+    color: var(--color-text);
+}
+
+.filter-btn.active {
+    background: var(--color-text);
+    color: var(--color-surface);
+    border-color: var(--color-text);
+}
+
+/* ===== TASK LIST ===== */
+.task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Each task item */
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s, transform 0.2s, opacity 0.3s;
+}
+
+.task-item.new {
+    animation: slideIn 0.3s ease;
+}
+
+.task-item:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-1px);
+}
+
+/* Custom checkbox */
+.task-checkbox {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.task-checkbox:hover {
+    border-color: var(--color-accent);
+}
+
+.task-checkbox:checked {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.task-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Task text */
+.task-text {
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    transition: all 0.2s;
+}
+
+/* Completed task styling */
+.task-item.completed {
+    opacity: 0.5;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--color-completed);
+}
+
+/* Delete button — hidden by default, shown on hover */
+.delete-btn {
+    opacity: 0;
+    padding: 6px 10px;
+    background: none;
+    border: none;
+    color: var(--color-danger);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    border-radius: 6px;
+}
+
+.task-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    background: rgba(204, 68, 68, 0.08);
+    transform: scale(1.1);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 12px 4px;
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+}
+
+.clear-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.clear-btn:hover {
+    color: var(--color-danger);
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--color-text-light);
+    display: none;
+}
+
+.empty-state.visible {
+    display: block;
+}
+
+.empty-icon {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 0.95rem;
+}
+
+/* ===== ANIMATION ===== 
+   @keyframes defines a reusable animation sequence.
+   'slideIn' is used when new tasks appear.
+*/
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Removing animation */
+.task-item.removing {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.3s ease;
+}
+
+/* ===== RESPONSIVE DESIGN =====
+   @media queries let you change styles based on screen size.
+   This makes the app look good on phones too.
+*/
+@media (max-width: 500px) {
+    body {
+        padding: 30px 16px;
+    }
+
+    .logo {
+        font-size: 2.2rem;
+    }
+
+    .task-form {
+        flex-direction: column;
+    }
+
+    .add-btn {
+        width: 100%;
+    }
+
+    .delete-btn {
+        opacity: 1;
+    }
+}
